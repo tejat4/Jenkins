@@ -1,0 +1,70 @@
+->Jenkins is an automation tool mainly used for:
+
+CI (Continuous Integration) → automatically building and testing code after every change
+
+CD (Continuous Delivery/Deployment) → automatically releasing your software
+
+Running scripts, jobs, pipelines, and automation tasks
+
+-> Simple Understanding
+
+Think of Jenkins like a robot that runs tasks for you automatically.
+
+->Example:
+If you are a developer and push code to GitHub, Jenkins can automatically:
+ 1.Pull the latest code
+ 2.Build that code
+ 3.Test it
+ 4.Deploy it to a server
+
+->Jenkins can be installed through native system packages, Docker, or even run standalone by any machine with a Java Runtime Environment (JRE) installed
+
+->Where is Jenkins Pipeline code (Jenkinsfile) saved?
+
+This is a VERY common doubt, and here is the clear answer:
+
+✔️ If your project uses GitHub / GitLab / Bitbucket:
+
+The Jenkinsfile is saved inside your project's repository.
+
+Example Git project structure:
+
+myproject/
+├── src/
+├── config/
+└── Jenkinsfile
+
+
+So the Jenkinsfile lives in your GitHub repo.
+
+Whenever you edit the pipeline in Blue Ocean, Jenkins commits changes to your GitHub repo automatically.
+
+✔️ Local location (On your machine)
+
+If you cloned the repo:
+
+~/projects/myproject/Jenkinsfile
+
+✔️ Jenkins DOES NOT store pipeline code internally
+
+Jenkins only reads the Jenkinsfile from your Git repo.
+It does not permanently save pipeline code inside the Jenkins server.
+
+🧠 Why is Jenkinsfile stored in Git?
+
+Because:
+
+It becomes part of your application code
+
+You can track changes
+
+Developers can update it
+
+It works with CI/CD best practices
+
+
+
+
+
+
+

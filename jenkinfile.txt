@@ -1,0 +1,174 @@
+-->1. What is a Jenkinsfile? (Very Simple Explanation)
+
+A Jenkinsfile is a text file that tells Jenkins what to do step-by-step.
+
+It is like a recipe for CI/CD.
+
+-->It contains instructions such as:
+
+How to take code from GitHub
+
+How to build it
+
+How to test it
+
+How to deploy it
+
+How to run shell commands
+
+How to create Docker images
+
+How to notify after success/failure
+
+➡️ Jenkins reads this file every time you run the pipeline.
+
+➡️ The Jenkinsfile must be stored in your GitHub repository.
+
+Example repo:
+
+myproject/
+ ├── src/
+ ├── Jenkinsfile
+
+🚀 2. What is a Jenkins Pipeline?
+
+A Pipeline is a set of steps that Jenkins runs in order.
+
+Think of Pipeline as:
+
+➡️ A series of stages
+➡️ Each stage contains steps
+➡️ Jenkinsfile describes this pipeline
+
+Example pipeline stages:
+
+Checkout (pull code from GitHub)
+
+Build
+
+Test
+
+Deploy
+
+🚀 3. Structure of a Pipeline (Simple Explanation)
+
+A Jenkins Pipeline looks like this:
+
+pipeline {
+    agent any
+    stages {
+        stage('Stage Name') {
+            steps {
+                // commands
+            }
+        }
+    }
+}
+
+
+✔ pipeline {} → tells Jenkins this is a pipeline
+✔ agent any → run on any Jenkins machine
+✔ stages {} → container for all major steps
+✔ stage {} → one phase of the pipeline (build/test/deploy)
+✔ steps {} → commands you want to run
+
+🚀 4. How to Write a Pipeline Program (Simple Examples)
+✅ Example 1: Very Simple Pipeline
+pipeline {
+    agent any
+    
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building your project...'
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+            }
+        }
+        
+        stage('Deploy') {
+            steps {
+                echo 'Deploying application...'
+            }
+        }
+    }
+}
+
+Explanation:
+
+Build stage → prints “Building your project”
+
+Test stage → prints “Running tests”
+
+Deploy stage → prints “Deploying application”
+
+This is the simplest pipeline.
+
+✅ Example 2: Running Linux Commands
+pipeline {
+    agent any
+    
+    stages {
+        stage('Build') {
+            steps {
+                sh 'echo Hello from Linux!'
+                sh 'ls -l'
+            }
+        }
+    }
+}
+
+
+sh → runs shell commands
+
+You can run any Linux command here
+
+✅ Example 3: Pipeline for a Java Maven Project
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+    }
+}
+
+✅ Example 4: Pipeline for Python
+pipeline {
+    agent any
+
+    stages {
+        stage('Install Requirements') {
+            steps {
+                sh 'pip install -r requirements.txt'
+            }
+        }
+        
+        stage('Run Script') {
+            steps {
+                sh 'python app.py'
+            }
+        }
+    }
+}
+
+
